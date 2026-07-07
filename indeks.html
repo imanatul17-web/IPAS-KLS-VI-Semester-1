@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Digital IPAS Kelas 6 - Semester 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <nav class="bg-indigo-600 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="font-bold text-xl flex items-center gap-2">
+                <i data-lucide="book-open"></i> Modul IPAS Kelas 6
+            </h1>
+            <div id="nav-links" class="flex gap-4 text-sm font-medium">
+                <button onclick="showTab('beranda')" class="hover:text-indigo-200">Beranda</button>
+                <button onclick="showTab('materi')" class="hover:text-indigo-200">Materi</button>
+                <button onclick="showTab('kuis')" class="hover:text-indigo-200">Kuis</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <!-- Beranda View -->
+        <div id="beranda" class="tab-content active">
+            <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center">
+                <h2 class="text-3xl font-bold text-indigo-900 mb-4">Selamat Datang di Modul Digital!</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto mb-8">
+                    Belajar Ilmu Pengetahuan Alam dan Sosial (IPAS) kelas 6 semester 1 kini lebih interaktif. 
+                    Pilih bab di bawah untuk memulai pembelajaran.
+                </p>
+                <button onclick="showTab('materi')" class="bg-indigo-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-indigo-700 transition">
+                    Mulai Belajar
+                </button>
+            </div>
+        </div>
+
+        <!-- Materi View -->
+        <div id="materi" class="tab-content">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">Daftar Bab Pembelajaran</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="materi-grid">
+                <!-- Data ini bisa diupdate sesuai materi modul Anda -->
+            </div>
+        </div>
+
+        <!-- Kuis View -->
+        <div id="kuis" class="tab-content">
+            <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+                <h2 class="text-2xl font-bold text-indigo-900 mb-4">Uji Pemahaman</h2>
+                <p class="text-slate-600 italic">Fitur kuis interaktif akan tersedia segera setelah materi selesai dipelajari.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const materiData = [
+            { id: 1, title: "Bab 1: Bagaimana Tubuh Bergerak?", desc: "Mengenal sistem rangka, otot, dan saraf manusia.", icon: "activity" },
+            { id: 2, title: "Bab 2: Cerita tentang Indonesia Kita", desc: "Sejarah perjuangan kemerdekaan dan peristiwa proklamasi.", icon: "flag" },
+            { id: 3, title: "Bab 3: Pelesir Keliling Dunia", desc: "Mengenal letak geografis dan keragaman budaya dunia.", icon: "globe" }
+        ];
+
+        function renderMateri() {
+            const grid = document.getElementById('materi-grid');
+            materiData.forEach(item => {
+                grid.innerHTML += `
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="${item.icon}"></i>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">${item.title}</h3>
+                        <p class="text-slate-500 text-sm mb-4">${item.desc}</p>
+                        <button class="text-indigo-600 font-semibold text-sm hover:underline">Baca Selengkapnya →</button>
+                    </div>
+                `;
+            });
+            lucide.createIcons();
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // Initialize App
+        window.onload = () => {
+            renderMateri();
+            lucide.createIcons();
+        };
+    </script>
+</body>
+</html>
